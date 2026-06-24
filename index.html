@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>观相小馆 | AI全维面相解析</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <main class="stage">
+    <nav class="topbar" aria-label="主导航">
+      <a class="brand" href="#top" aria-label="观相小馆首页">
+        <span class="brand-mark">相</span>
+        <span>
+          <strong>观相小馆</strong>
+          <small>Oriental AI Face Reading</small>
+        </span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#top">首页</a>
+        <a href="#scanner">面相解析</a>
+        <a href="#face-result">趋势报告</a>
+        <a href="#face-result">脸型解析</a>
+        <a href="#analysis">全维报告</a>
+      </div>
+
+      <p class="privacy">本地AI识别 · 照片不上传服务器</p>
+    </nav>
+
+    <section class="hero" id="top">
+      <p class="eyebrow">Local AI · San Ting Wu Yan · Face Reading Culture</p>
+      <h1>观相 · AI全维面相解析</h1>
+      <p>以面部可见特征为基础，融合三庭五眼比例、脸型结构与传统相法文化，生成更直观、更细腻、更具解释力的娱乐性解读。</p>
+    </section>
+
+    <section class="workspace">
+      <aside class="scanner-card glass" id="scanner">
+        <div class="scanner-head">
+          <div>
+            <p class="eyebrow">AI Scanner</p>
+            <h2>上传正脸照片</h2>
+          </div>
+          <span class="status-pill" id="modelStatus">模型准备中</span>
+        </div>
+
+        <label class="photo-scanner" id="dropZone" for="photoInput">
+          <input id="photoInput" type="file" accept="image/*">
+          <img id="photoPreview" alt="上传照片预览">
+          <canvas id="overlayCanvas" aria-hidden="true"></canvas>
+
+          <span class="portrait-placeholder" aria-hidden="true"><i></i></span>
+          <span class="scan-ring" aria-hidden="true"></span>
+          <span class="upload-caption">
+            <strong>上传正脸照片 · AI自动提取特征</strong>
+            <small>建议光线充足、无遮挡、正面角度</small>
+          </span>
+        </label>
+
+        <label class="age-field" for="ageInput">
+          <span>年龄信息（选填）</span>
+          <input id="ageInput" type="number" min="12" max="100" placeholder="未填写则按外观成熟度推测">
+        </label>
+
+        <button class="primary-btn" id="uploadBtn" type="button">选择照片并自动分析</button>
+
+        <div class="tech-note" id="scanMessage">等待识别引擎加载。模型可用时提取478个关键点，离线时启用本地结构估算。</div>
+        <div class="local-note">
+          <span>识别状态</span>
+          <strong id="photoState">待上传</strong>
+        </div>
+      </aside>
+
+      <section class="results-column">
+        <section class="score-card glass" id="face-result">
+          <div class="score-orb" id="scoreRing">
+            <div>
+              <strong id="scoreNumber">--</strong>
+              <span>面相气韵综合分</span>
+            </div>
+          </div>
+
+          <div class="score-copy">
+            <p class="eyebrow">Core Result</p>
+            <h2 id="reportTitle">上传照片后自动生成解析</h2>
+            <strong class="verdict" id="coreVerdict">上传后生成总格断语</strong>
+            <p id="reportSummary">系统会优先识别画面中最大且最清晰的人脸，并在照片上叠加关键点与结构辅助线。</p>
+          </div>
+        </section>
+
+        <section class="face-card glass">
+          <div class="face-card-head">
+            <div>
+              <p class="eyebrow">Face Archetype</p>
+              <h2 id="faceType">等待识别</h2>
+            </div>
+            <span id="archetypeTag">AI识别中</span>
+          </div>
+
+          <p class="face-desc" id="faceDesc">上传清晰正脸后，这里会给出更好懂的脸型类比，例如狐狸脸、鹅蛋脸、方圆脸或娃娃脸等。</p>
+
+          <div class="ratio-panel">
+            <div class="ratio-row">
+              <div>
+                <span>上庭比例</span>
+                <small id="upperInsight">额头估算，受刘海影响</small>
+              </div>
+              <b id="upperThird">--</b>
+              <i><em id="upperThirdBar"></em></i>
+            </div>
+            <div class="ratio-row">
+              <div>
+                <span>中庭比例</span>
+                <small id="middleInsight">眉眼到鼻底结构</small>
+              </div>
+              <b id="middleThird">--</b>
+              <i><em id="middleThirdBar"></em></i>
+            </div>
+            <div class="ratio-row">
+              <div>
+                <span>下庭比例</span>
+                <small id="lowerInsight">鼻底到下巴稳定感</small>
+              </div>
+              <b id="lowerThird">--</b>
+              <i><em id="lowerThirdBar"></em></i>
+            </div>
+            <div class="ratio-row">
+              <div>
+                <span>五眼集中度</span>
+                <small id="eyeInsight">眼距与五官聚合感</small>
+              </div>
+              <b id="eyeSpacing">--</b>
+              <i><em id="eyeSpacingBar"></em></i>
+            </div>
+          </div>
+
+          <div class="hair-advice">
+            <h3>专属发型建议</h3>
+            <p id="hairText">识别后会根据脸型给出发型推荐与避雷指南。</p>
+          </div>
+        </section>
+
+        <section class="analysis-grid" id="analysis" aria-live="polite">
+          <article class="analysis-card wide glass">
+            <span>01</span>
+            <h3>婚恋感情</h3>
+            <b class="stars" id="romanceStars">--</b>
+            <p id="romanceText">等待 AI 识别结果。</p>
+          </article>
+          <article class="analysis-card wide glass">
+            <span>02</span>
+            <h3>财运事业</h3>
+            <b class="stars" id="wealthStars">--</b>
+            <p id="wealthText">等待 AI 识别结果。</p>
+          </article>
+          <article class="analysis-card glass">
+            <span>03</span>
+            <h3>性格天赋</h3>
+            <b class="stars" id="talentStars">--</b>
+            <p id="talentText">等待 AI 识别结果。</p>
+          </article>
+          <article class="analysis-card glass">
+            <span>04</span>
+            <h3>健康运势</h3>
+            <b class="stars" id="healthStars">--</b>
+            <p id="healthText">仅作传统望诊文化参考，不进行医学诊断。</p>
+          </article>
+          <article class="analysis-card glass">
+            <span>05</span>
+            <h3>子女亲缘</h3>
+            <b class="stars" id="familyStars">--</b>
+            <p id="familyText">等待 AI 识别结果。</p>
+          </article>
+          <article class="analysis-card glass">
+            <span>06</span>
+            <h3>职业适配</h3>
+            <b class="stars" id="careerStars">--</b>
+            <p id="careerText">等待 AI 识别结果。</p>
+          </article>
+        </section>
+
+        <div class="action-row">
+          <button class="primary-btn" id="fullReportBtn" type="button">生成完整深度报告</button>
+          <button class="secondary-btn" id="shareBtn" type="button">保存我的面相卡</button>
+        </div>
+
+        <section class="full-report glass" id="fullReportSection" hidden>
+          <div class="full-report-head">
+            <div>
+              <p class="eyebrow">Deep Report</p>
+              <h2>完整面相文化报告</h2>
+            </div>
+            <span>先观察 · 再推断 · 落到人生场景</span>
+          </div>
+          <div class="full-report-content" id="fullReportContent"></div>
+        </section>
+      </section>
+    </section>
+
+    <section class="notice">
+      <strong>免责声明</strong>
+      <p>本页内容基于面部可见特征与传统面相文化逻辑生成，仅供娱乐与文化参考，不构成医学、法律、投资、婚恋等专业建议。照片会受到光线、角度、美颜、遮挡等因素影响，结果以倾向分析为主。用户照片默认只在本地浏览器中处理，不上传服务器、不保存照片，刷新页面后照片和分析结果会清空。</p>
+    </section>
+  </main>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
